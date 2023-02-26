@@ -1,29 +1,26 @@
 module "bigquery-dataset-gasolina" {
-  source                      = "./modules/bigquery"
+  source  = "./modules/bigquery"
   dataset_id                  = "gasolina_brasil"
   dataset_name                = "gasolina_brasil"
   description                 = "Dataset a respeito do histórico de preços da Gasolina no Brasil a partir de 2004"
   project_id                  = var.project_id
   location                    = var.region
   delete_contents_on_destroy  = true
-  deletion_protection         = false
-  access                      = [
+  deletion_protection = false
+  access = [
     {
       role = "OWNER"
       special_group = "projectOwners"
     },
-
     {
       role = "READER"
       special_group = "projectReaders"
     },
-
     {
       role = "WRITER"
       special_group = "projectWriters"
     }
   ]
-
   tables=[
     {
         table_id           = "tb_historico_combustivel_brasil",

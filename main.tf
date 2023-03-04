@@ -36,8 +36,8 @@ module "bigquery-dataset-gasolina" {
         expiration_time    = null,
         clustering         = ["produto", "regiao_sigla", "sigla_uf"],
         labels             = {
-          name    = "stack_data_pipeline"
-          project  = "gasolina"
+          name    = "data_pipeline"
+          project  = "terraformiac"
         },
         deletion_protection = true
         schema = file("./bigquery/schema/br_anp_precos_combustiveis/microdados.json")

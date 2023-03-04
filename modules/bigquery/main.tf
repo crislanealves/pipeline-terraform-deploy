@@ -15,13 +15,13 @@
  */
 
 locals {
-  tables          = { for table in var.tables : table["table_id"] => table }
-  views           = { for view in var.views : view["view_id"] => view }
-  external_tables = { for external_table in var.external_tables : external_table["table_id"] => external_table }
-  procedures      = { for procedure in var.procedures : procedure["routine_id"] => procedure }
+  tables          = { for table          in var.tables          : table         ["table_id"  ] => table          }
+  views           = { for view           in var.views           : view          ["view_id"   ] => view           }
+  external_tables = { for external_table in var.external_tables : external_table["table_id"  ] => external_table }
+  procedures      = { for procedure      in var.procedures      : procedure     ["routine_id"] => procedure      }
 
   iam_to_primitive = {
-    "roles/bigquery.dataOwner" : "OWNER"
+    "roles/bigquery.dataOwner"  : "OWNER"
     "roles/bigquery.dataEditor" : "WRITER"
     "roles/bigquery.dataViewer" : "READER"
   }
@@ -52,10 +52,10 @@ resource "google_bigquery_dataset" "main" {
       # Thus, do the conversion between IAM to primitive role here to prevent the diff.
       role = lookup(local.iam_to_primitive, access.value.role, access.value.role)
 
-      domain         = lookup(access.value, "domain", null)
+      domain         = lookup(access.value, "domain"        , null)
       group_by_email = lookup(access.value, "group_by_email", null)
-      user_by_email  = lookup(access.value, "user_by_email", null)
-      special_group  = lookup(access.value, "special_group", null)
+      user_by_email  = lookup(access.value, "user_by_email" , null)
+      special_group  = lookup(access.value, "special_group" , null)
     }
   }
 }
@@ -65,9 +65,9 @@ resource "google_bigquery_table" "main" {
   dataset_id          = google_bigquery_dataset.main.dataset_id
   friendly_name       = each.key
   table_id            = each.key
-  labels              = each.value["labels"]
-  schema              = each.value["schema"]
-  clustering          = each.value["clustering"]
+  labels              = each.value["labels"         ]
+  schema              = each.value["schema"         ]
+  clustering          = each.value["clustering"     ]
   expiration_time     = each.value["expiration_time"]
   project             = var.project_id
   deletion_protection = false
@@ -75,9 +75,9 @@ resource "google_bigquery_table" "main" {
   dynamic "time_partitioning" {
     for_each = each.value["time_partitioning"] != null ? [each.value["time_partitioning"]] : []
     content {
-      type                     = time_partitioning.value["type"]
-      expiration_ms            = time_partitioning.value["expiration_ms"]
-      field                    = time_partitioning.value["field"]
+      type                     = time_partitioning.value["type"                    ]
+      expiration_ms            = time_partitioning.value["expiration_ms"           ]
+      field                    = time_partitioning.value["field"                   ]
       require_partition_filter = time_partitioning.value["require_partition_filter"]
     }
   }
@@ -111,7 +111,7 @@ resource "google_bigquery_table" "view" {
   deletion_protection = false
 
   view {
-    query          = each.value["query"]
+    query          = each.value["query"         ]
     use_legacy_sql = each.value["use_legacy_sql"]
   }
 
@@ -127,24 +127,24 @@ resource "google_bigquery_table" "external_table" {
   dataset_id          = google_bigquery_dataset.main.dataset_id
   friendly_name       = each.key
   table_id            = each.key
-  labels              = each.value["labels"]
+  labels              = each.value["labels"         ]
   expiration_time     = each.value["expiration_time"]
   project             = var.project_id
   deletion_protection = false
 
   external_data_configuration {
-    autodetect            = each.value["autodetect"]
-    compression           = each.value["compression"]
+    autodetect            = each.value["autodetect"           ]
+    compression           = each.value["compression"          ]
     ignore_unknown_values = each.value["ignore_unknown_values"]
-    max_bad_records       = each.value["max_bad_records"]
-    schema                = each.value["schema"]
-    source_format         = each.value["source_format"]
-    source_uris           = each.value["source_uris"]
+    max_bad_records       = each.value["max_bad_records"      ]
+    schema                = each.value["schema"               ]
+    source_format         = each.value["source_format"        ]
+    source_uris           = each.value["source_uris"          ]
 
     dynamic "google_sheets_options" {
       for_each = each.value["google_sheets_options"] != null ? [each.value["google_sheets_options"]] : []
       content {
-        range             = google_sheets_options.value["range"]
+        range             = google_sheets_options.value["range"            ]
         skip_leading_rows = google_sheets_options.value["skip_leading_rows"]
       }
     }
@@ -161,18 +161,18 @@ resource "google_bigquery_routine" "procedure" {
   for_each        = local.procedures
   dataset_id      = google_bigquery_dataset.main.dataset_id
   routine_id      = each.key
-  description     = each.value["description"]
-  routine_type    = each.value["routine_type"]
-  language        = each.value["language"]
+  description     = each.value["description"    ]
+  routine_type    = each.value["routine_type"   ]
+  language        = each.value["language"       ]
   definition_body = each.value["definition_body"]
   project         = var.project_id
 
   dynamic "arguments" {
     for_each = each.value["arguments"] != null ? each.value["arguments"] : []
     content {
-      name          = arguments.value["name"]
-      data_type     = arguments.value["data_type"]
-      mode          = arguments.value["mode"]
+      name          = arguments.value["name"         ]
+      data_type     = arguments.value["data_type"    ]
+      mode          = arguments.value["mode"         ]
       argument_kind = arguments.value["argument_kind"]
     }
   }

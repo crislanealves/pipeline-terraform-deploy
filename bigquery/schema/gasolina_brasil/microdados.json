@@ -8,7 +8,7 @@
     {
       "description": "",
       "mode": "NULLABLE",
-      "name": "estado_sigla",
+      "name": "sigla_uf",
       "type": "STRING"
     },
     {
@@ -26,13 +26,13 @@
     {
       "description": "",
       "mode": "NULLABLE",
-      "name": "cnpj_da_revenda",
+      "name": "cnpj_revenda",
       "type": "STRING"
     },
     {
       "description": "",
       "mode": "NULLABLE",
-      "name": "nome_da_rua",
+      "name": "nome_rua",
       "type": "STRING"
     },
     {
@@ -50,13 +50,13 @@
     {
       "description": "",
       "mode": "NULLABLE",
-      "name": "bairro",
+      "name": "bairro_revenda",
       "type": "STRING"
     },
     {
       "description": "",
       "mode": "NULLABLE",
-      "name": "cep",
+      "name": "cep_revenda",
       "type": "STRING"
     },
     {
@@ -68,25 +68,25 @@
     {
       "description": "",
       "mode": "NULLABLE",
-      "name": "data_da_coleta",
+      "name": "data_coleta",
       "type": "STRING"
     },
     {
       "description": "",
       "mode": "NULLABLE",
-      "name": "valor_de_venda",
+      "name": "valor_venda",
       "type": "FLOAT"
     },
     {
       "description": "",
       "mode": "NULLABLE",
-      "name": "valor_de_compra",
+      "name": "valor_compra",
       "type": "FLOAT"
     },
     {
       "description": "",
       "mode": "NULLABLE",
-      "name": "unidade_de_medida",
+      "name": "unidade_medida",
       "type": "STRING"
     },
     {

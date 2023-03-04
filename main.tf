@@ -34,7 +34,7 @@ module "bigquery-dataset-gasolina" {
         },
         range_partitioning = null,
         expiration_time    = null,
-        clustering         = ["produto", "regiao_sigla", "estado_sigla"],
+        clustering         = ["produto", "regiao_sigla", "sigla_uf"],
         labels             = {
           name    = "stack_data_pipeline"
           project  = "gasolina"

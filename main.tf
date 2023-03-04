@@ -1,4 +1,4 @@
-module "bigquery-dataset-gasolina" {
+module "bigquery-dataset-br-anp-precos-combustiveis" {
   source  = "./modules/bigquery"
   
   dataset_id                  = "br_anp_precos_combustiveis"

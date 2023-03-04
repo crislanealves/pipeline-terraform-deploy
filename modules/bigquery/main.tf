@@ -15,10 +15,10 @@
  */
 
 locals {
-  tables          = { for table          in var.tables          : table         ["table_id"  ] => table          }
-  views           = { for view           in var.views           : view          ["view_id"   ] => view           }
-  external_tables = { for external_table in var.external_tables : external_table["table_id"  ] => external_table }
-  procedures      = { for procedure      in var.procedures      : procedure     ["routine_id"] => procedure      }
+  tables          = { for table          in var.tables          : table["table_id"] => table          }
+  views           = { for view           in var.views           : view["view_id"] => view           }
+  external_tables = { for external_table in var.external_tables : external_table["table_id"] => external_table }
+  procedures      = { for procedure      in var.procedures      : procedure["routine_id"] => procedure      }
 
   iam_to_primitive = {
     "roles/bigquery.dataOwner"  : "OWNER"

@@ -40,7 +40,7 @@ module "bigquery-dataset-br-anp-precos-combustiveis" {
           project  = "gasolina"
         },
         deletion_protection = true
-        schema = file("./bigquery/schema/br-anp-precos-combustiveis/microdados.json")
+        schema = file("./bigquery/schema/br_anp_precos_combustiveis/microdados.json")
     }
   ]
 }

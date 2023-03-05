@@ -28,6 +28,10 @@ def put_file_to_gcs(output_file: str, bucket_name: str, content):
     except Exception as ex:
         print(ex)
 
+# Teste api 
+@app.get('/')
+async def read_root():
+    return {"Hello": "World"}
 
 def get_data(remote_url):
     """  Function used to download data """

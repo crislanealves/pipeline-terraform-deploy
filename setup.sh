@@ -21,7 +21,7 @@ sudo apt-get update && sudo apt-get install google-cloud-cli
 
 echo "Passo 4: Autenticação"
 
-gcloud auth login
+gcloud auth application-default login
 
 
 

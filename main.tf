@@ -36,7 +36,7 @@ module "bigquery-dataset-gasolina" {
         expiration_time    = null,
         clustering         = ["produto", "regiao_sigla", "sigla_uf"],
         labels             = {
-          name    = "data_pipeline"
+          name     = "data_pipeline"
           project  = "pascalina-function"
         },
         deletion_protection = true
@@ -48,7 +48,7 @@ module "bigquery-dataset-gasolina" {
 module "bucket-raw" {
   source  = "./modules/gcs"
 
-  name       = "camada-raw"
+  name       = "pascalina-raw-007"
   project_id = var.project_id
   location   = var.region
 }
@@ -56,7 +56,7 @@ module "bucket-raw" {
 module "bucket-trusted" {
   source  = "./modules/gcs"
 
-  name       = "camada-trusted"
+  name       = "pascalina-trusted-007"
   project_id = var.project_id
   location   = var.region
 }
@@ -64,7 +64,7 @@ module "bucket-trusted" {
 module "bucket-pyspark-tmp" {
   source  = "./modules/gcs"
 
-  name       = "camada-pyspark-tmp"
+  name       = "pascalina-pyspark-tmp-007"
   project_id = var.project_id
   location   = var.region
 }
@@ -72,7 +72,7 @@ module "bucket-pyspark-tmp" {
 module "bucket-pyspark-code" {
   source  = "./modules/gcs"
 
-  name       = "camada-pyspark-code"
+  name       = "camada-pyspark-code-007"
   project_id = var.project_id
   location   = var.region
 }

@@ -1,2 +1,2 @@
-project_id = "terraformiac-007"
+project_id = "pascalina-function"
 region     = "us-central1"

@@ -6,7 +6,7 @@ provider "google" {
 # Armazena o "estado" do Terraform 
 terraform {
   backend "gcs" {
-    bucket = "terraform-files-007"
+    bucket = "pipeline-terraform-state"
     prefix = "terraform/state"
   }
   required_providers {
